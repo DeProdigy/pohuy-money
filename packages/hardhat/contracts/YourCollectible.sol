@@ -9,12 +9,12 @@ import 'base64-sol/base64.sol';
 
 import './HexStrings.sol';
 import './ToColor.sol';
+
 //learn more: https://docs.openzeppelin.com/contracts/3.x/erc721
 
 // GET LISTED ON OPENSEA: https://testnets.opensea.io/get-listed/step-two
 
 contract YourCollectible is ERC721, Ownable {
-
   using Strings for uint256;
   using HexStrings for uint160;
   using ToColor for bytes3;
@@ -86,33 +86,133 @@ contract YourCollectible is ERC721, Ownable {
   function generateSVGofTokenById(uint256 id) internal view returns (string memory) {
 
     string memory svg = string(abi.encodePacked(
-      '<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">',
-        renderTokenById(id),
-      '</svg>'
+      '<svg xmlns="http://www.w3.org/2000/svg" width="520" height="840" viewBox="0 0 520 840" fill="none"><rect x="480" y="80" width="40" height="40" fill="#7020C4"/>',
+          generateHead(id),
+          '<rect x="440" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="440" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="440" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="440" y="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="440" y="240" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="440" y="280" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="440" y="320" width="40" height="40" fill="black"/>',
+          '<rect x="440" y="360" width="40" height="40" fill="black"/>',
+          '<rect x="440" y="400" width="40" height="40" fill="black"/>',
+          '<rect x="440" y="440" width="40" height="40" fill="black"/>',
+          '<rect x="440" y="480" width="40" height="40" fill="black"/>',
+          '<rect x="440" y="520" width="40" height="40" fill="black"/>',
+          '<rect x="440" y="560" width="40" height="40" fill="black"/>',
+          '<rect x="400" y="600" width="40" height="40" fill="black"/>',
+          '<rect x="360" y="640" width="40" height="40" fill="black"/>',
+          '<rect x="320" y="680" width="40" height="40" fill="black"/>',
+          '<rect x="280" y="680" width="40" height="40" fill="black"/>',
+          '<rect x="280" y="720" width="40" height="40" fill="black"/>',
+          '<rect x="280" y="760" width="40" height="40" fill="black"/>',
+          '<rect x="280" y="800" width="40" height="40" fill="black"/>',
+          '<rect x="240" y="680" width="40" height="40" fill="black"/>',
+          '<rect x="200" y="640" width="40" height="40" fill="black"/>',
+          '<rect x="480" y="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="400" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="400" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="400" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="400" y="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="400" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="400" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="360" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="360" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="360" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="360" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="320" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="320" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="320" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="320" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="280" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="280" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="280" y="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="280" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="280" y="240" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="280" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="280" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="240" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="240" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="240" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="240" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="240" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="200" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="200" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="200" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="200" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="160" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="160" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="160" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="160" y="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="160" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="120" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="120" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="120" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="120" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="80" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="80" y="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="40" y="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect y="200" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="80" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="80" y="240" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="120" y="240" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="80" y="280" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="80" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="40" y="320" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="40" y="360" width="40" height="40" fill="#7020C4"/>',
+          '<rect y="400" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="80" y="400" width="40" height="40" fill="black"/>',
+          '<rect x="80" y="440" width="40" height="40" fill="black"/>',
+          '<rect x="40" y="440" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="80" y="480" width="40" height="40" fill="black"/>',
+          '<rect x="80" y="520" width="40" height="40" fill="black"/>',
+          '<rect x="80" y="560" width="40" height="40" fill="black"/>',
+          '<rect x="120" y="600" width="40" height="40" fill="black"/>',
+          '<rect x="120" y="640" width="40" height="40" fill="black"/>',
+          '<rect x="120" y="680" width="40" height="40" fill="black"/>',
+          '<rect x="120" y="720" width="40" height="40" fill="black"/>',
+          '<rect x="120" y="760" width="40" height="40" fill="black"/>',
+          '<rect x="120" y="800" width="40" height="40" fill="black"/>',
+          '<rect x="80" y="40" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="40" y="80" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="40" y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect y="120" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="40" y="160" width="40" height="40" fill="#7020C4"/>',
+          '<rect x="280" y="480" width="40" height="40" fill="black"/>',
+          '<rect x="320" y="560" width="40" height="40" fill="#703E21"/>',
+          '<rect x="240" y="560" width="40" height="40" fill="#703E21"/>',
+          '<rect x="280" y="560" width="40" height="40" fill="#703E21"/>',
+          '<rect x="160" y="320" width="40" height="40" fill="#703E21"/>',
+          '<rect x="200" y="320" width="40" height="40" fill="#703E21"/>',
+          '<rect x="360" y="320" width="40" height="40" fill="#703E21"/>',
+          '<rect x="400" y="320" width="40" height="40" fill="#703E21"/>',
+          '<rect x="200" y="360" width="40" height="40" fill="#AD8A64"/>',
+          '<rect x="400" y="360" width="40" height="40" fill="#AD8A64"/>',
+          generateEyes(),
+        '</svg>'
     ));
-
     return svg;
   }
 
-  // Visibility is `public` to enable it being called by other contracts for composition.
-  function renderTokenById(uint256 id) public view returns (string memory) {
+  function generateHead(uint256 id) public view returns (string memory) {
     string memory render = string(abi.encodePacked(
-      '<g id="eye1">',
-          '<ellipse stroke-width="3" ry="29.5" rx="29.5" id="svg_1" cy="154.5" cx="181.5" stroke="#000" fill="#fff"/>',
-          '<ellipse ry="3.5" rx="2.5" id="svg_3" cy="154.5" cx="173.5" stroke-width="3" stroke="#000" fill="#000000"/>',
-        '</g>',
-        '<g id="head">',
-          '<ellipse fill="#',
+      '<rect x="80" y="160" width="360" height="400" fill="#',
           color[id].toColor(),
-          '" stroke-width="3" cx="204.5" cy="211.80065" id="svg_5" rx="',
-          chubbiness[id].toString(),
-          '" ry="51.80065" stroke="#000"/>',
-        '</g>',
-        '<g id="eye2">',
-          '<ellipse stroke-width="3" ry="29.5" rx="29.5" id="svg_2" cy="168.5" cx="209.5" stroke="#000" fill="#fff"/>',
-          '<ellipse ry="3.5" rx="3" id="svg_4" cy="169.5" cx="208" stroke-width="3" fill="#000000" stroke="#000"/>',
-        '</g>'
-      ));
+      '"/>'
+    ));
+
+    return render;
+  }
+
+  function generateEyes() public view returns (string memory) {
+    string memory render = string(abi.encodePacked(
+      '<rect x="160" y="360" width="40" height="40" fill="green"/>',
+      '<rect x="360" y="360" width="40" height="40" fill="green"/>'
+    ));
 
     return render;
   }
