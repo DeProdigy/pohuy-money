@@ -26,6 +26,7 @@ contract YourCollectible is ERC721, Ownable {
   }
 
   mapping (uint256 => bytes3) public color;
+  mapping (uint256 => bytes3) public eyeColor;
   mapping (uint256 => uint256) public chubbiness;
 
   uint256 mintDeadline = block.timestamp + 24 hours;
@@ -42,6 +43,7 @@ contract YourCollectible is ERC721, Ownable {
 
       bytes32 predictableRandom = keccak256(abi.encodePacked( blockhash(block.number-1), msg.sender, address(this) ));
       color[id] = bytes2(predictableRandom[0]) | ( bytes2(predictableRandom[1]) >> 8 ) | ( bytes3(predictableRandom[2]) >> 16 );
+      eyeColor[id] = bytes2(predictableRandom[3]) | ( bytes2(predictableRandom[4]) >> 8 ) | ( bytes3(predictableRandom[5]) >> 16 );
       chubbiness[id] = 35+((55*uint256(uint8(predictableRandom[3])))/255);
 
       return id;
@@ -192,7 +194,7 @@ contract YourCollectible is ERC721, Ownable {
           '<rect x="400" y="320" width="40" height="40" fill="#703E21"/>',
           '<rect x="200" y="360" width="40" height="40" fill="#AD8A64"/>',
           '<rect x="400" y="360" width="40" height="40" fill="#AD8A64"/>',
-          generateEyes(),
+          generateEyes(id),
         '</svg>'
     ));
     return svg;
@@ -208,10 +210,14 @@ contract YourCollectible is ERC721, Ownable {
     return render;
   }
 
-  function generateEyes() public view returns (string memory) {
+  function generateEyes(uint256 id) public view returns (string memory) {
     string memory render = string(abi.encodePacked(
-      '<rect x="160" y="360" width="40" height="40" fill="green"/>',
-      '<rect x="360" y="360" width="40" height="40" fill="green"/>'
+      '<rect x="160" y="360" width="40" height="40" fill="#',
+        eyeColor[id].toColor(),
+      '"/>',
+      '<rect x="360" y="360" width="40" height="40" fill="#',
+        eyeColor[id].toColor(),
+      '"/>'
     ));
 
     return render;
